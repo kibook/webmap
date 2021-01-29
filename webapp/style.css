@@ -1,0 +1,92 @@
+@font-face {
+	font-family: "Chinese Rocks";
+	src: url("chineserocks.ttf");
+}
+
+html, body {
+	width: 100vw;
+	height: 100vh;
+	padding: 0;
+	margin: 0;
+	font-family: Helvetica;
+}
+
+body {
+	background-color: black;
+}
+
+a {
+	color: cornflowerblue;
+	text-decoration: none;
+}
+
+#map {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-image: url("map.jpg");
+	background-size: 100% 100%;
+}
+
+#server-name {
+	position: absolute;
+	bottom: 3%;
+	left: 50%;
+	transform: translate(-50%, 0);
+	color: white;
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 0.5vh 0.5vw;
+	font-size: 2.5vh;
+}
+
+#info {
+	display: flex;
+	flex-flow: column;
+	position: absolute;
+	top: 3%;
+	left: 3%;
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 1vh 1vw;
+	color: white;
+}
+
+#weather-container {
+	font-size: 1.7vh;
+}
+
+#time, #weather {
+	display: inline-block;
+}
+
+#player-list-container {
+	padding-top: 1vh;
+}
+
+#player-list-title {
+	font-size: 2.5vh;
+	font-family: "Chinese Rocks";
+	border-bottom: 1px solid white;
+}
+
+#player-list {
+	font-size: 1.5vh;
+	padding-top: 1vh;
+}
+
+.blip {
+	background-image: url("blip.svg");
+	background-size: contain;
+	background-repeat: no-repeat;
+	position: absolute;
+	width: 1vw;
+	height: 1vw;
+}
+
+.blip-tag {
+	position: absolute;
+	transform: translate(-100%, -100%);
+	color: white;
+	background-color: rgba(0, 0, 0, 0.5);
+	font-size: 1.5vh;
+	padding: 0.25vh 0.25vw;
+}
