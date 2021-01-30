@@ -39,6 +39,18 @@ function updateMap() {
 				var left    = (playerInfo.coords.x + mapRadius - mapXOffset) / mapWidth * 100;
 				var bottom  = (playerInfo.coords.y + mapRadius - mapYOffset) / mapHeight * 100;
 
+				if (left < 0) {
+					left = 0;
+				} else if (left > 100) {
+					left = 100;
+				}
+
+				if (bottom < 0) {
+					bottom = 0;
+				} else if (bottom > 100) {
+					bottom = 100;
+				}
+
 				blip.style.left = `${left}%`;
 				blip.style.bottom = `${bottom}%`;
 				blip.style.transform = `rotate(-${playerInfo.heading}deg)`;
