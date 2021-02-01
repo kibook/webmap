@@ -74,6 +74,12 @@ a {
 	padding-top: 1vh;
 }
 
+.player {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-gap: 1vh 1vw;
+}
+
 .blip {
 	background-image: url("blip.svg");
 	background-size: contain;
@@ -94,4 +100,7 @@ a {
 	background-color: rgba(0, 0, 0, 0.5);
 	font-size: 1.5vh;
 	padding: 0.25vh 0.25vw;
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-gap: 0.5vh 0.5vw;
 }

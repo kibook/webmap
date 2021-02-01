@@ -29,8 +29,15 @@ function updateMap() {
 			if (playerInfo) {
 				var playerDiv = document.createElement('div');
 				playerDiv.className = 'player';
-				playerDiv.innerHTML = playerInfo.name;
 
+				var playerNameDiv = document.createElement('div');
+				playerNameDiv.innerHTML = playerInfo.name;
+
+				var playerHealthDiv = document.createElement('div');
+				playerHealthDiv.innerHTML = `<i class="fas fa-heart"></i> ${playerInfo.health}`;
+
+				playerDiv.appendChild(playerNameDiv);
+				playerDiv.appendChild(playerHealthDiv);
 				playerList.appendChild(playerDiv);
 
 				var blip = document.createElement('div');
@@ -65,9 +72,17 @@ function updateMap() {
 
 				var blipTag = document.createElement('div');
 				blipTag.className = 'blip-tag';
-				blipTag.innerHTML = playerInfo.name;
 				blipTag.style.left = `${left}%`
 				blipTag.style.bottom = `${bottom}%`
+
+				var blipTagPlayerName = document.createElement('div');
+				blipTagPlayerName.innerHTML = playerInfo.name;
+
+				var blipTagPlayerHealth = document.createElement('div');
+				blipTagPlayerHealth.innerHTML = `<i class="fas fa-heart"></i> ${playerInfo.health}`;
+
+				blipTag.appendChild(blipTagPlayerName);
+				blipTag.appendChild(blipTagPlayerHealth);
 
 				blips.appendChild(blip);
 				blips.appendChild(blipTag);
