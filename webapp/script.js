@@ -1,8 +1,20 @@
+/* Radius of the entire in-game world. */
 const mapRadius = 16000;
+
+/* The number of in-game distance units wide the map graphic is. */
 const mapWidth = 11820;
+
+/* The number of in-game distance units tall the map graphic is. */
 const mapHeight = 8660;
+
+/* The number of in-game distance units the map graphic is offset from the minimum X coordinate. */
 const mapXOffset = 8515;
+
+/* The number of in-game distance units the map graphic is offset from the minimum Y coordinate. */
 const mapYOffset = 10850;
+
+/* How often to fetch updates to the map. */
+const updateInterval = 5000;
 
 function timeToString(time) {
 	return `${String(time.hour).padStart(2, '0')}:${String(time.minute).padStart(2, '0')}:${String(time.second).padStart(2, '0')}`
@@ -93,5 +105,5 @@ function updateMap() {
 
 window.addEventListener("load", event => {
 	updateMap();
-	setInterval(updateMap, 5000);
+	setInterval(updateMap, updateInterval);
 });
