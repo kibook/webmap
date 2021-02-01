@@ -21,24 +21,23 @@ https://redm.khzae.net/map
    Example:
 	 
 	 ```lua
-	 Config.UpdateUrl = "https://redm.khzae.net/map/update"
+	 Config.UpdateUrl = "https://myserver.com/map/update.php"
 	 Config.AuthorizationKey = "secret"
 	 ```
 
-4. Edit `update` in the web app directory to set the same authorization key.
+4. Edit `update.php` in the web app directory to set the same authorization key.
 
    Example:
 
-	 ```sh
-	 authorization_key=secret
+	 ```php
+	 $authorization_key = "secret";
 	 ```
 
-5. Ensure the `update` script and `info.json` file have the proper permissions to be executed and read by the HTTP server:
+5. Ensure the `info.json` can be read and written to by the web server:
 
    Example:
 
    ```sh
-	 chmod +x update
 	 chown www-data:www-data info.json
 	 ```
 
