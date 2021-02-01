@@ -70,14 +70,15 @@ a {
 }
 
 #player-list {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-gap: 1vh 1vw;
 	font-size: 1.5vh;
 	padding-top: 1vh;
 }
 
 .player {
-	display: grid;
-	grid-template-columns: auto auto;
-	grid-gap: 1vh 1vw;
+	display: contents;
 }
 
 .blip {
