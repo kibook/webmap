@@ -1,7 +1,1 @@
 DirectoryIndex index.html
-
-SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
-
-<Files update>
-	SetHandler cgi-script
-</Files>

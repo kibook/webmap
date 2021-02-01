@@ -1,6 +1,6 @@
 Config = {}
 
-Config.UpdateUrl = "https://myserver.com/map/update"
+Config.UpdateUrl = "https://myserver.com/map/update.php"
 Config.AuthorizationKey = ""
 Config.UpdateInterval = 5000
 
