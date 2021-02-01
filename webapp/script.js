@@ -34,7 +34,12 @@ function updateMap() {
 				playerList.appendChild(playerDiv);
 
 				var blip = document.createElement('div');
-				blip.className = 'blip';
+
+				if (playerInfo.health == 0) {
+					blip.className = 'blip dead';
+				} else {
+					blip.className = 'blip';
+				}
 
 				var left    = (playerInfo.coords.x + mapRadius - mapXOffset) / mapWidth * 100;
 				var bottom  = (playerInfo.coords.y + mapRadius - mapYOffset) / mapHeight * 100;
@@ -53,7 +58,10 @@ function updateMap() {
 
 				blip.style.left = `${left}%`;
 				blip.style.bottom = `${bottom}%`;
-				blip.style.transform = `rotate(-${playerInfo.heading}deg)`;
+
+				if (playerInfo.health > 0) {
+					blip.style.transform = `rotate(-${playerInfo.heading}deg)`;
+				}
 
 				var blipTag = document.createElement('div');
 				blipTag.className = 'blip-tag';

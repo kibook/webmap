@@ -83,6 +83,10 @@ a {
 	height: 1vw;
 }
 
+.blip.dead {
+	background-image: url("blip_dead.svg");
+}
+
 .blip-tag {
 	position: absolute;
 	transform: translate(-100%, -100%);

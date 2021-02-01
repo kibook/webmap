@@ -5,9 +5,9 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   width="83.910713mm"
-   height="117.52987mm"
-   viewBox="0 0 83.910713 117.52987"
+   width="92.604164mm"
+   height="92.604172mm"
+   viewBox="0 0 92.604164 92.604172"
    version="1.1"
    id="svg8">
   <defs
@@ -26,16 +26,22 @@
   </metadata>
   <g
      id="layer1"
-     transform="translate(-62.555073,17.744169)">
-    <circle
-       style="fill:#0080c4;stroke-width:0.264583"
-       id="path10"
-       cx="104.51043"
-       cy="57.830345"
-       r="41.955357" />
-    <path
-       style="fill:#000000;stroke-width:0.177675"
-       id="path14"
-       d="m 125.38742,5.0355272 -20.87699,5e-6 -20.876996,-5e-6 10.4385,-11.3898494 10.438496,-11.3898468 10.4385,11.3898468 z" />
+     transform="translate(-70.11458,-49.647681)">
+    <rect
+       style="fill:#000000;stroke-width:0.264583"
+       id="rect10"
+       width="114.39135"
+       height="16.570711"
+       x="92.970062"
+       y="-22.757639"
+       transform="rotate(45)" />
+    <rect
+       style="fill:#000000;stroke-width:0.264583"
+       id="rect10-8"
+       width="114.39136"
+       height="16.570711"
+       x="-71.667961"
+       y="141.88039"
+       transform="matrix(-0.70710678,0.70710678,0.70710678,0.70710678,0,0)" />
   </g>
 </svg>
