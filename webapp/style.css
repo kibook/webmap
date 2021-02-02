@@ -81,6 +81,10 @@ a {
 	display: contents;
 }
 
+.player div {
+	white-space: nowrap;
+}
+
 .blip {
 	background-image: url("blip.svg");
 	background-size: contain;
@@ -104,4 +108,8 @@ a {
 	display: grid;
 	grid-template-columns: auto auto;
 	grid-gap: 0.5vh 0.5vw;
+}
+
+.blip-tag div {
+	white-space: nowrap;
 }
