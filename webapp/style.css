@@ -81,8 +81,19 @@ a {
 	display: contents;
 }
 
-.player div {
+.player-name, .player-health {
 	white-space: nowrap;
+}
+
+.player-health {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-gap: 0.25em;
+	align-items: baseline;
+}
+
+.player-health-value {
+	text-align: right;
 }
 
 .blip {
@@ -108,8 +119,4 @@ a {
 	display: grid;
 	grid-template-columns: auto auto;
 	grid-gap: 0.5vh 0.5vw;
-}
-
-.blip-tag div {
-	white-space: nowrap;
 }

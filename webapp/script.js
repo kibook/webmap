@@ -43,10 +43,22 @@ function updateMap() {
 				playerDiv.className = 'player';
 
 				var playerNameDiv = document.createElement('div');
+				playerNameDiv.className = 'player-name';
 				playerNameDiv.innerHTML = playerInfo.name;
 
 				var playerHealthDiv = document.createElement('div');
-				playerHealthDiv.innerHTML = `<i class="fas fa-heart"></i> ${playerInfo.health}`;
+				playerHealthDiv.className = 'player-health';
+
+				var playerHealthIconDiv = document.createElement('div');
+				playerHealthIconDiv.className = 'player-health-icon';
+				playerHealthIconDiv.innerHTML = '<i class="fas fa-heart"></i>';
+
+				var playerHealthValueDiv = document.createElement('div');
+				playerHealthValueDiv.className = 'player-health-value';
+				playerHealthValueDiv.innerHTML = playerInfo.health;
+
+				playerHealthDiv.appendChild(playerHealthIconDiv);
+				playerHealthDiv.appendChild(playerHealthValueDiv);
 
 				playerDiv.appendChild(playerNameDiv);
 				playerDiv.appendChild(playerHealthDiv);
@@ -88,10 +100,22 @@ function updateMap() {
 				blipTag.style.bottom = `${bottom}%`
 
 				var blipTagPlayerName = document.createElement('div');
+				blipTagPlayerName.className = 'player-name';
 				blipTagPlayerName.innerHTML = playerInfo.name;
 
 				var blipTagPlayerHealth = document.createElement('div');
-				blipTagPlayerHealth.innerHTML = `<i class="fas fa-heart"></i> ${playerInfo.health}`;
+				blipTagPlayerHealth.className = 'player-health';
+
+				var blipTagPlayerHealthIcon = document.createElement('div');
+				blipTagPlayerHealthIcon.className = 'player-health-icon';
+				blipTagPlayerHealthIcon.innerHTML = '<i class="fas fa-heart"></i>';
+
+				var blipTagPlayerHealthValue = document.createElement('div');
+				blipTagPlayerHealthValue.className = 'player-health-value';
+				blipTagPlayerHealthValue.innerHTML = playerInfo.health;
+
+				blipTagPlayerHealth.appendChild(blipTagPlayerHealthIcon);
+				blipTagPlayerHealth.appendChild(blipTagPlayerHealthValue);
 
 				blipTag.appendChild(blipTagPlayerName);
 				blipTag.appendChild(blipTagPlayerHealth);
