@@ -17,7 +17,7 @@ const mapYOffset = 10850;
 const updateInterval = 5000;
 
 function dayOfWeek(day) {
-	return ["Sun", "Mon", "Tue", "wed", "Thu", "Fri", "Sat"][day];
+	return ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][day];
 }
 
 function timeToString(time) {
