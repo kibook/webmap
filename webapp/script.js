@@ -16,8 +16,12 @@ const mapYOffset = 10850;
 /* How often to fetch updates to the map. */
 const updateInterval = 5000;
 
+function dayOfWeek(day) {
+	return ["Sun", "Mon", "Tue", "wed", "Thu", "Fri", "Sat"][day];
+}
+
 function timeToString(time) {
-	return `${String(time.hour).padStart(2, '0')}:${String(time.minute).padStart(2, '0')}:${String(time.second).padStart(2, '0')}`
+	return `${dayOfWeek(time.day)} ${String(time.hour).padStart(2, '0')}:${String(time.minute).padStart(2, '0')}:${String(time.second).padStart(2, '0')}`
 }
 
 function updateMap() {
