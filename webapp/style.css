@@ -90,9 +90,6 @@ a {
 	grid-template-columns: auto auto;
 	grid-gap: 0.25em;
 	align-items: baseline;
-}
-
-.player-health-value {
 	text-align: right;
 }
 
