@@ -17,9 +17,15 @@
 					<div id="time"></div>
 					<div id="weather"></div>
 				</div>
-				<div id="player-list-container">
-					<div id="player-list-title">Players</div>
+				<div id="tab-bar">
+					<button class="tab-button active" data-tab="player-list-container">Players</button>
+					<button class="tab-button" data-tab="forecast-container">Forecast</button>
+				</div>
+				<div class="tab" id="player-list-container">
 					<div id="player-list"></div>
+				</div>
+				<div class="tab" id="forecast-container" style="display: none">
+					<div id="forecast"></div>
 				</div>
 			</div>
 			<div id="blips"></div>

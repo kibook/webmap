@@ -40,6 +40,7 @@ CreateThread(function()
 		local info = {
 			time = exports.weathersync:getTime(),
 			weather = exports.weathersync:getWeather(),
+			forecast = exports.weathersync:getForecast(),
 			players = Players
 		}
 

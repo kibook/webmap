@@ -59,14 +59,33 @@ a {
 	display: inline-block;
 }
 
-#player-list-container {
+#tab-bar {
 	padding-top: 1vh;
+	display: flex;
+	gap: 0.5vh 0.5vw;
 }
 
-#player-list-title {
+.tab-button {
+	background: none;
+	border: none;
+	color: rgba(255, 255, 255, 0.5);
 	font-size: 2.5vh;
 	font-family: "Chinese Rocks";
+	padding: 0;
+	border-bottom: solid 1px rgba(0, 0, 0, 0);
+}
+
+.tab-button:active, .tab-button:hover, .tab-button:focus {
 	border-bottom: 1px solid white;
+}
+
+.tab-button.active {
+	color: white;
+	border-bottom: 1px solid red;
+}
+
+.tab {
+	padding-top: 0.5vh;
 }
 
 #player-list {
@@ -87,7 +106,7 @@ a {
 
 .player-health {
 	display: grid;
-	grid-template-columns: auto auto;
+	grid-template-columns: repeat(2, max-content);
 	grid-gap: 0.25em;
 	align-items: baseline;
 	text-align: right;
@@ -116,4 +135,13 @@ a {
 	display: grid;
 	grid-template-columns: auto auto;
 	grid-gap: 0.5vh 0.5vw;
+}
+
+#forecast {
+	display: grid;
+	grid-template-columns: repeat(3, max-content);
+	grid-gap: 0.25vh 0.5vw;
+	align-items: baseline;
+	font-size: 1.7vh;
+	text-align: right;
 }

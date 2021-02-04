@@ -16,12 +16,48 @@ const mapYOffset = 10850;
 /* How often to fetch updates to the map. */
 const updateInterval = 5000;
 
+/* Icons for each type of weather. */
+const weatherIcons = {
+	blizzard:       "❄️",
+	clouds:         "⛅",
+	drizzle:        "🌧️",
+	fog:            "🌫️",
+	groundblizzard: "❄️",
+	hail:           "🌨️",
+	highpressure:   "☀️",
+	hurricane:      "🌀",
+	misty:          "🌫️",
+	overcast:       "☁️",
+	overcastdark:   "☁️",
+	rain:           "🌧️",
+	sandstorm:      "🌪️",
+	shower:         "🌧️",
+	sleet:          "🌧️",
+	snow:           "🌨️",
+	snowlight:      "🌨️",
+	sunny:          "☀️",
+	thunder:        "🌩️",
+	thunderstorm:   "⛈️",
+	whiteout:       "❄️"
+};
+
 function dayOfWeek(day) {
 	return ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][day];
 }
 
 function timeToString(time) {
-	return `${dayOfWeek(time.day)} ${String(time.hour).padStart(2, '0')}:${String(time.minute).padStart(2, '0')}:${String(time.second).padStart(2, '0')}`
+	return `${String(time.hour).padStart(2, "0")}:${String(time.minute).padStart(2, "0")}:${String(time.second).padStart(2, "0")}`;
+}
+
+function dayAndTimeToString(time) {
+	return `${dayOfWeek(time.day)} ${timeToString(time)}`
+}
+
+function tabButtonOnClick(event) {
+	document.querySelectorAll(".tab").forEach(tab => tab.style.display = "none");
+	document.querySelectorAll(".tab-button").forEach(button => button.className = "tab-button");
+	document.getElementById(this.getAttribute("data-tab")).style.display = "block";
+	this.className = "tab-button active";
 }
 
 function updateMap() {
@@ -29,9 +65,9 @@ function updateMap() {
 		var time = document.getElementById('time');
 		var weather = document.getElementById('weather');
 
-		time.innerHTML = timeToString(info.time);
-		weather.innerHTML = info.weather.icon;
-		weather.title = info.weather.name;
+		time.innerHTML = dayAndTimeToString(info.time);
+		weather.innerHTML = weatherIcons[info.weather];
+		weather.title = info.weather;
 
 		var playerList = document.getElementById('player-list');
 		var blips = document.getElementById('blips');
@@ -76,8 +112,8 @@ function updateMap() {
 					blip.className = 'blip';
 				}
 
-				var left    = (playerInfo.coords.x + mapRadius - mapXOffset) / mapWidth * 100;
-				var bottom  = (playerInfo.coords.y + mapRadius - mapYOffset) / mapHeight * 100;
+				var left   = (playerInfo.coords.x + mapRadius - mapXOffset) / mapWidth * 100;
+				var bottom = (playerInfo.coords.y + mapRadius - mapYOffset) / mapHeight * 100;
 
 				if (left < 0) {
 					left = 0;
@@ -128,10 +164,40 @@ function updateMap() {
 				blips.appendChild(blipTag);
 			}
 		});
+
+		var forecastDiv = document.getElementById("forecast");
+
+		forecastDiv.innerHTML = "";
+
+		var prevDay;
+
+		info.forecast.forEach(entry => {
+			var dayDiv = document.createElement("div");
+			dayDiv.className = "forecast-day";
+			if (entry.day != prevDay) {
+				dayDiv.innerHTML = dayOfWeek(entry.day);
+				prevDay = entry.day;
+			}
+
+			var timeDiv = document.createElement("div");
+			timeDiv.className = "forecast-time";
+			timeDiv.innerHTML = timeToString(entry);
+
+			var weatherDiv = document.createElement("div");
+			weatherDiv.className = "forecast-weather";
+			weatherDiv.innerHTML = weatherIcons[entry.weather];
+			weatherDiv.title = entry.weather;
+
+			forecastDiv.appendChild(dayDiv);
+			forecastDiv.appendChild(timeDiv);
+			forecastDiv.appendChild(weatherDiv);
+		});
 	});
 }
 
 window.addEventListener("load", event => {
+	document.querySelectorAll("#tab-bar button").forEach(button => button.addEventListener("click", tabButtonOnClick));
+
 	updateMap();
 	setInterval(updateMap, updateInterval);
 });
