@@ -95,9 +95,11 @@ function updateMap() {
 
 		var playerList = document.getElementById('player-list');
 		var blips = document.getElementById('blips');
+		var blipTags = document.getElementById('blip-tags');
 
 		playerList.innerHTML = '';
 		blips.innerHTML = '';
+		blipTags.innerHTML = '';
 
 		Object.keys(info.players).forEach(player => {
 			var playerInfo = info.players[player];
@@ -158,6 +160,8 @@ function updateMap() {
 					blip.style.transform = `rotate(-${playerInfo.heading}deg)`;
 				}
 
+				blips.appendChild(blip);
+
 				var blipTag = document.createElement('div');
 				blipTag.className = 'blip-tag';
 				blipTag.style.left = `${left}%`
@@ -184,8 +188,7 @@ function updateMap() {
 				blipTag.appendChild(blipTagPlayerName);
 				blipTag.appendChild(blipTagPlayerHealth);
 
-				blips.appendChild(blip);
-				blips.appendChild(blipTag);
+				blipTags.appendChild(blipTag);
 			}
 		});
 
