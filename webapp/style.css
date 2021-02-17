@@ -55,8 +55,12 @@ a {
 	font-size: 1.7vh;
 }
 
-#time, #weather {
+#time, #weather, #wind {
 	display: inline-block;
+}
+
+#wind {
+	font-size: 75%;
 }
 
 #tab-bar {
@@ -139,9 +143,13 @@ a {
 
 #forecast {
 	display: grid;
-	grid-template-columns: repeat(3, max-content);
+	grid-template-columns: repeat(4, max-content);
 	grid-gap: 0.25vh 0.5vw;
 	align-items: baseline;
 	font-size: 1.7vh;
 	text-align: right;
+}
+
+.forecast-wind {
+	font-size: 75%;
 }

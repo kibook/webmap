@@ -45,6 +45,28 @@ function dayOfWeek(day) {
 	return ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][day];
 }
 
+function cardinalDirection(h) {
+	if (h <= 22.5) {
+		return "N";
+	} else if (h <= 67.5) {
+		return "NE";
+	} else if (h <= 112.5) {
+		return "E";
+	} else if (h <= 157.5) {
+		return "SE";
+	} else if (h <= 202.5) {
+		return "S";
+	} else if (h <= 247.5) {
+		return "SW";
+	} else if (h <= 292.5) {
+		return "W";
+	} else if (h <= 337.5) {
+		return "NW";
+	} else {
+		return "N";
+	}
+}
+
 function timeToString(time) {
 	return `${String(time.hour).padStart(2, "0")}:${String(time.minute).padStart(2, "0")}:${String(time.second).padStart(2, "0")}`;
 }
@@ -64,10 +86,12 @@ function updateMap() {
 	fetch("info.json").then(resp => resp.json()).then(info => {
 		var time = document.getElementById('time');
 		var weather = document.getElementById('weather');
+		var wind = document.getElementById("wind");
 
 		time.innerHTML = dayAndTimeToString(info.time);
 		weather.innerHTML = weatherIcons[info.weather];
 		weather.title = info.weather;
+		wind.innerHTML = cardinalDirection(info.wind.direction);
 
 		var playerList = document.getElementById('player-list');
 		var blips = document.getElementById('blips');
@@ -188,9 +212,14 @@ function updateMap() {
 			weatherDiv.innerHTML = weatherIcons[entry.weather];
 			weatherDiv.title = entry.weather;
 
+			var windDiv = document.createElement("div");
+			windDiv.className = "forecast-wind";
+			windDiv.innerHTML = cardinalDirection(entry.wind);
+
 			forecastDiv.appendChild(dayDiv);
 			forecastDiv.appendChild(timeDiv);
 			forecastDiv.appendChild(weatherDiv);
+			forecastDiv.appendChild(windDiv);
 		});
 	});
 }
