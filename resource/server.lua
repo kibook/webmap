@@ -25,6 +25,14 @@ function HandleResponse(err, response, headers)
 	end
 end
 
+function PrunePlayers()
+	for player, info in pairs(Players) do
+		if info.name ~= GetPlayerName(player) then
+			Players[player] = nil
+		end
+	end
+end
+
 AddEventHandler("playerDropped", function(reason)
 	Players[source] = nil
 end)
@@ -35,6 +43,8 @@ end)
 
 CreateThread(function()
 	while true do
+		PrunePlayers()
+
 		TriggerClientEvent("webmap:updateInfo", -1)
 
 		local info = {
