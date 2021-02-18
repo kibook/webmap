@@ -7,6 +7,7 @@ AddEventHandler("webmap:updateInfo", function()
 		name = GetPlayerName(),
 		coords = GetEntityCoords(playerPed),
 		heading = GetEntityHeading(playerPed),
-		health = GetEntityHealth(playerPed)
+		health = GetEntityHealth(playerPed),
+		id = GetPlayerServerId()
 	})
 end)
