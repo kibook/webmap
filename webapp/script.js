@@ -75,6 +75,16 @@ function dayAndTimeToString(time) {
 	return `${dayOfWeek(time.day)} ${timeToString(time)}`
 }
 
+function mapOnMouseMove(event) {
+	var width  = event.clientX / this.offsetWidth;
+	var height = Math.abs(event.clientY - this.offsetHeight) / this.offsetHeight;
+
+	var x = width  * mapWidth  + mapXOffset - mapRadius
+	var y = height * mapHeight + mapYOffset - mapRadius
+
+	document.getElementById("coords").innerHTML = `${x.toFixed(3)}, ${y.toFixed(3)}`
+}
+
 function tabButtonOnClick(event) {
 	document.querySelectorAll(".tab").forEach(tab => tab.style.display = "none");
 	document.querySelectorAll(".tab-button").forEach(button => button.className = "tab-button");
@@ -233,6 +243,8 @@ function updateMap() {
 }
 
 window.addEventListener("load", event => {
+	document.getElementById("map").addEventListener("mousemove", mapOnMouseMove);
+
 	document.querySelectorAll("#tab-bar button").forEach(button => button.addEventListener("click", tabButtonOnClick));
 
 	updateMap();

@@ -158,3 +158,10 @@ a {
 	font-size: 75%;
 	text-align: left;
 }
+
+#coords {
+	position: absolute;
+	right: 3%;
+	bottom: 3%;
+	font-size: 1.25vh;
+}
