@@ -108,6 +108,10 @@ function updateMap() {
 				var playerDiv = document.createElement('div');
 				playerDiv.className = 'player';
 
+				var playerIdDiv = document.createElement('div');
+				playerIdDiv.className = 'player-id';
+				playerIdDiv.innerHTML = player;
+
 				var playerNameDiv = document.createElement('div');
 				playerNameDiv.className = 'player-name';
 				playerNameDiv.innerHTML = playerInfo.name;
@@ -126,6 +130,7 @@ function updateMap() {
 				playerHealthDiv.appendChild(playerHealthIconDiv);
 				playerHealthDiv.appendChild(playerHealthValueDiv);
 
+				playerDiv.appendChild(playerIdDiv);
 				playerDiv.appendChild(playerNameDiv);
 				playerDiv.appendChild(playerHealthDiv);
 				playerList.appendChild(playerDiv);
