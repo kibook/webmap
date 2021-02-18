@@ -110,7 +110,7 @@ function updateMap() {
 
 				var playerNameDiv = document.createElement('div');
 				playerNameDiv.className = 'player-name';
-				playerNameDiv.innerHTML = playerInfo.name;
+				playerNameDiv.innerHTML = playerInfo.name + " / " + playerInfo.id;
 
 				var playerHealthDiv = document.createElement('div');
 				playerHealthDiv.className = 'player-health';
@@ -169,7 +169,7 @@ function updateMap() {
 
 				var blipTagPlayerName = document.createElement('div');
 				blipTagPlayerName.className = 'player-name';
-				blipTagPlayerName.innerHTML = playerInfo.name;
+				blipTagPlayerName.innerHTML = playerInfo.name + " / " + playerInfo.id;
 
 				var blipTagPlayerHealth = document.createElement('div');
 				blipTagPlayerHealth.className = 'player-health';
