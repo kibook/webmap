@@ -48,10 +48,10 @@ CreateThread(function()
 		TriggerClientEvent("webmap:updateInfo", -1)
 
 		local info = {
-			time = exports.weathersync:getTime(),
-			weather = exports.weathersync:getWeather(),
-			wind = exports.weathersync:getWind(),
-			forecast = exports.weathersync:getForecast(),
+			time = exports["redm-weathersync"]:getTime(),
+			weather = exports["redm-weathersync"]:getWeather(),
+			wind = exports["redm-weathersync"]:getWind(),
+			forecast = exports["redm-weathersync"]:getForecast(),
 			players = Players
 		}
 
