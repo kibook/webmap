@@ -25,7 +25,7 @@ https://redm.khzae.net/map
 	 Config.AuthorizationKey = "secret"
 	 ```
 
-4. Edit `update.php` in the web app directory to set the same authorization key.
+4. Edit `update.php` in the web app directory to set the same authorization key at the top of the script (line 2).
 
    Example:
 
