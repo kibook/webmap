@@ -1,6 +1,8 @@
 <?php
+/* Replace "changeme" with the authorization key you set in config.lua. */
 $authorization_key = "changeme";
 
+/* You don't have to change anything below this line. */
 $headers = apache_request_headers();
 
 if ($headers["Authorization"] == $authorization_key) {
