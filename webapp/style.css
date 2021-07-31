@@ -133,6 +133,12 @@ a {
 	background-image: url("blip_dead.svg");
 }
 
+.blip.pin {
+	background-image: url("blip_pin.svg");
+	width: 2vw;
+	height: 2vw;
+}
+
 .blip-tag {
 	position: absolute;
 	transform: translate(-100%, -100%);

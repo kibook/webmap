@@ -41,6 +41,8 @@ const weatherIcons = {
 	whiteout:       "❄️"
 };
 
+let customPoints = [];
+
 function dayOfWeek(day) {
 	return ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][day];
 }
@@ -90,6 +92,46 @@ function tabButtonOnClick(event) {
 	document.querySelectorAll(".tab-button").forEach(button => button.className = "tab-button");
 	document.getElementById(this.getAttribute("data-tab")).style.display = "block";
 	this.className = "tab-button active";
+}
+
+function addBlip(x, y, z, heading, blipClass, tag) {
+	let blip = document.createElement('div');
+
+	blip.className = blipClass;
+
+	let left   = (x + mapRadius - mapXOffset) / mapWidth * 100;
+	let bottom = (y + mapRadius - mapYOffset) / mapHeight * 100;
+
+	if (left < 0) {
+		left = 0;
+	} else if (left > 100) {
+		left = 100;
+	}
+
+	if (bottom < 0) {
+		bottom = 0;
+	} else if (bottom > 100) {
+		bottom = 100;
+	}
+
+	blip.style.left = `${left}%`;
+	blip.style.bottom = `${bottom}%`;
+
+	blip.style.transform = `rotate(-${heading}deg)`;
+
+	let blipTag = document.createElement('div');
+	blipTag.className = 'blip-tag';
+	blipTag.style.left = `${left}%`
+	blipTag.style.bottom = `${bottom}%`
+
+	if (typeof tag == 'string') {
+		blipTag.innerHTML = tag;
+	} else {
+		tag.forEach(e => blipTag.appendChild(e));
+	}
+
+	document.getElementById('blips').appendChild(blip);
+	document.getElementById('blip-tags').appendChild(blipTag);
 }
 
 function updateMap() {
@@ -145,42 +187,8 @@ function updateMap() {
 				playerDiv.appendChild(playerHealthDiv);
 				playerList.appendChild(playerDiv);
 
-				var blip = document.createElement('div');
-
-				if (playerInfo.health == 0) {
-					blip.className = 'blip dead';
-				} else {
-					blip.className = 'blip';
-				}
-
-				var left   = (playerInfo.coords.x + mapRadius - mapXOffset) / mapWidth * 100;
-				var bottom = (playerInfo.coords.y + mapRadius - mapYOffset) / mapHeight * 100;
-
-				if (left < 0) {
-					left = 0;
-				} else if (left > 100) {
-					left = 100;
-				}
-
-				if (bottom < 0) {
-					bottom = 0;
-				} else if (bottom > 100) {
-					bottom = 100;
-				}
-
-				blip.style.left = `${left}%`;
-				blip.style.bottom = `${bottom}%`;
-
-				if (playerInfo.health > 0) {
-					blip.style.transform = `rotate(-${playerInfo.heading}deg)`;
-				}
-
-				blips.appendChild(blip);
-
-				var blipTag = document.createElement('div');
-				blipTag.className = 'blip-tag';
-				blipTag.style.left = `${left}%`
-				blipTag.style.bottom = `${bottom}%`
+				let blipClass = playerInfo.health == 0 ? 'blip dead' : 'blip';
+				let heading = playerInfo.health == 0 ? 0 : playerInfo.heading;
 
 				var blipTagPlayerName = document.createElement('div');
 				blipTagPlayerName.className = 'player-name';
@@ -200,11 +208,12 @@ function updateMap() {
 				blipTagPlayerHealth.appendChild(blipTagPlayerHealthIcon);
 				blipTagPlayerHealth.appendChild(blipTagPlayerHealthValue);
 
-				blipTag.appendChild(blipTagPlayerName);
-				blipTag.appendChild(blipTagPlayerHealth);
-
-				blipTags.appendChild(blipTag);
+				addBlip(playerInfo.coords.x, playerInfo.coords.y, playerInfo.coords.z, heading, blipClass, [blipTagPlayerName, blipTagPlayerHealth]);
 			}
+		});
+
+		customPoints.forEach(point => {
+			addBlip(point.x, point.y, point.z, 0, 'blip pin', point.name);
 		});
 
 		var forecastDiv = document.getElementById("forecast");
@@ -242,10 +251,23 @@ function updateMap() {
 	});
 }
 
+function addCustomPoint(name, x, y, z) {
+	customPoints.push({name: name, x: x, y: y, z: z});
+}
+
 window.addEventListener("load", event => {
 	document.getElementById("map").addEventListener("mousemove", mapOnMouseMove);
 
 	document.querySelectorAll("#tab-bar button").forEach(button => button.addEventListener("click", tabButtonOnClick));
+
+	let url = new URL(window.location);
+	let x = url.searchParams.get("x");
+	let y = url.searchParams.get("y");
+	let z = url.searchParams.get("z");
+
+	if (x && y && z) {
+		addCustomPoint(`${x}, ${y}, ${z}`, parseFloat(x), parseFloat(y), parseFloat(z));
+	}
 
 	updateMap();
 	setInterval(updateMap, updateInterval);
