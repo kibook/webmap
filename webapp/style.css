@@ -124,6 +124,7 @@ a {
 	background-image: url("blip.svg");
 	background-size: contain;
 	background-repeat: no-repeat;
+	background-position: center;
 	position: absolute;
 	width: 1vw;
 	height: 1vw;
@@ -135,8 +136,8 @@ a {
 
 .blip.pin {
 	background-image: url("blip_pin.svg");
-	width: 2vw;
-	height: 2vw;
+	width: 1.5vw;
+	height: 1.5vw;
 }
 
 .blip-tag {
