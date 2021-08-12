@@ -139,6 +139,10 @@ function addBlip(x, y, z, heading, blipClass, tag) {
 
 function updateMap() {
 	fetch(updateUrl).then(resp => resp.json()).then(info => {
+		var serverName = document.getElementById('server-name');
+
+		serverName.innerHTML = info.serverName;
+
 		var time = document.getElementById('time');
 		var weather = document.getElementById('weather');
 		var wind = document.getElementById("wind");
