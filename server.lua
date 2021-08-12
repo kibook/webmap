@@ -10,8 +10,10 @@ local function prunePlayers()
 	end
 end
 
-local function sendFile(res, fileName)
-	local fileData = LoadResourceFile(GetCurrentResourceName(), "webapp/" .. fileName)
+local function sendFile(res, path)
+	path = "webapp" .. path
+
+	local fileData = LoadResourceFile(GetCurrentResourceName(), path)
 
 	if not fileData then
 		res.writeHead(404)
@@ -55,7 +57,7 @@ SetHttpHandler(function(req, res)
 	local path = req.path
 
 	if path == "/" then
-		path = "index.html"
+		path = "/index.html"
 	end
 
 	path = path:gsub("%.%.", "")
