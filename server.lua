@@ -11,9 +11,7 @@ local function prunePlayers()
 end
 
 local function sendFile(res, path)
-	path = "webapp" .. path
-
-	local fileData = LoadResourceFile(GetCurrentResourceName(), path)
+	local fileData = LoadResourceFile(GetCurrentResourceName(), "webapp" .. path)
 
 	if not fileData then
 		res.writeHead(404)
@@ -54,7 +52,7 @@ CreateThread(function()
 end)
 
 SetHttpHandler(function(req, res)
-	local path = req.path
+	local path = string.match(req.path, "([^?]+)")
 
 	if path == "/" then
 		path = "/index.html"
