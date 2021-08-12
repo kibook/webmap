@@ -8,37 +8,24 @@ https://redm.khzae.net/map
 
 # Installation
 
-1. Copy the contents of the `resource` folder to a directory in the resources folder of your RedM server.
+1. Copy to a directory in the `resources` folder of your RedM server.
 
    Example: `/var/redm/server-data/resources/[local]/webmap`
 
-2. Copy the contents of the `webapp` folder to a directory on your HTTP server.
+2. Add `start webmap` to `server.cfg`.
+
+3. Access the map at http://localhost:30120/webmap/ (**Note:** The trailing slash is necessary).
+
+You can alternatively install the web app portion on an external HTTP server as follows:
+
+1. Copy the contents of the `webapp` folder to your HTTP server.
 
    Example: `/var/www/html/map`
 
-3. Edit `config.lua` in the resource directory to set the URL of the web app and an authorization key.
+2. Edit `script.js` and change the `updateUrl` constant to:
 
-   Example:
-	 
-	 ```lua
-	 Config.UpdateUrl = "https://myserver.com/map/update.php"
-	 Config.AuthorizationKey = "secret"
-	 ```
+   ```
+   http://localhost:30120/webmap/info.json
+   ```
 
-4. Edit `update.php` in the web app directory to set the same authorization key at the top of the script.
-
-   Example:
-
-	 ```php
-	 $authorization_key = "secret";
-	 ```
-
-5. Ensure the `info.json` can be read and written to by the web server:
-
-   Example:
-
-   ```sh
-	 chown www-data:www-data info.json
-	 ```
-
-6. Add `start webmap` to `server.cfg`.
+   If your HTTP server is on a different server than your FiveM server, replace `localhost` with the IP of the FiveM server.

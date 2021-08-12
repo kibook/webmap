@@ -16,6 +16,9 @@ const mapYOffset = 10850;
 /* How often to fetch updates to the map. */
 const updateInterval = 5000;
 
+/* URL to fetch server info from. */
+const updateUrl = "info.json";
+
 /* Icons for each type of weather. */
 const weatherIcons = {
 	blizzard:       "❄️",
@@ -135,7 +138,7 @@ function addBlip(x, y, z, heading, blipClass, tag) {
 }
 
 function updateMap() {
-	fetch("info.json").then(resp => resp.json()).then(info => {
+	fetch(updateUrl).then(resp => resp.json()).then(info => {
 		var time = document.getElementById('time');
 		var weather = document.getElementById('weather');
 		var wind = document.getElementById("wind");
