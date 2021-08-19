@@ -24,7 +24,7 @@ end
 
 local function sendInfo(res)
 	res.send(json.encode({
-		serverName = GetConvar('sv_hostname', 'Server Name'),
+		serverName = GetConvar("sv_projectName", GetConvar("sv_hostname", "Server Name")),
 		time = exports.weathersync:getTime(),
 		weather = exports.weathersync:getWeather(),
 		wind = exports.weathersync:getWind(),
