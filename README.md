@@ -6,6 +6,12 @@ Live web-based map showing the locations of players and other info about the ser
 
 https://redm.khzae.net/map/
 
+# Requirements
+
+- [httpmanager](https://github.com/kibook/httpmanager)
+
+- [weathersync](https://github.com/kibook/redm-weathersync)
+
 # Installation
 
 1. Copy to a directory in the `resources` folder of your RedM server.
