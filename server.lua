@@ -4,7 +4,7 @@ RegisterNetEvent("webmap:updateInfo")
 
 local function prunePlayers()
 	for player, info in pairs(players) do
-		if info.name ~= GetPlayerName(player) then
+		if not GetPlayerEndpoint(player) then
 			players[player] = nil
 		end
 	end
@@ -30,14 +30,22 @@ SetHttpHandler(exports.httpmanager:createHttpHandler {
 	documentRoot = "webapp",
 	routes = {
 		["^/info.json$"] = function(req, res, helpers)
-			res.sendJson {
-				serverName = GetConvar("sv_projectName", GetConvar("sv_hostname", "Server Name")),
-				time = exports.weathersync:getTime(),
-				weather = exports.weathersync:getWeather(),
-				wind = exports.weathersync:getWind(),
-				forecast = exports.weathersync:getForecast(),
-				players = players
-			}
+			local data = {}
+
+			data.serverName = GetConvar("sv_projectName", GetConvar("sv_hostname", "Server Name"))
+			data.players = players
+
+			if GetResourceState("weathersync") == "started" then
+				data.time = exports.weathersync:getTime()
+				data.weather = exports.weathersync:getWeather()
+				data.wind = exports.weathersync:getWind()
+				data.forecast = exports.weathersync:getForecast()
+			end
+
+			res.sendJson(data)
+		end,
+		["^/game$"] = function(req, res, helpers)
+			res.sendJson{game = GetConvar("gamename", "gta5")}
 		end
 	}
 })

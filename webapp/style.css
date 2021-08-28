@@ -1,6 +1,11 @@
 @font-face {
 	font-family: "Chinese Rocks";
-	src: url("chineserocks.ttf");
+	src: url("rdr3/chineserocks.ttf");
+}
+
+@font-face {
+	font-family: "Pricedown";
+	src: url("gta5/pricedown.otf");
 }
 
 html, body {
@@ -12,7 +17,7 @@ html, body {
 }
 
 body {
-	background-color: #d4b891;
+	background-color: #000;
 }
 
 a {
@@ -24,7 +29,6 @@ a {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	background-image: url("map.jpg");
 	background-size: 100% 100%;
 	overflow: hidden;
 }
@@ -74,7 +78,6 @@ a {
 	border: none;
 	color: rgba(255, 255, 255, 0.5);
 	font-size: 2.5vh;
-	font-family: "Chinese Rocks";
 	padding: 0;
 	border-bottom: solid 1px rgba(0, 0, 0, 0);
 }

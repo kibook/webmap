@@ -1,23 +1,42 @@
+/* Map settings for RedM */
+const rdr3Map = {
+	width: 11820,
+	height: 8660,
+	xOffset: 8515,
+	yOffset: 10850
+};
+
+/* Map settings for FiveM */
+const gta5Map = {
+	width: 12340,
+	height: 12200,
+	xOffset: 10390,
+	yOffset: 12150
+};
+
 /* Radius of the entire in-game world. */
 const mapRadius = 16000;
 
 /* The number of in-game distance units wide the map graphic is. */
-const mapWidth = 11820;
+let mapWidth = 0;
 
 /* The number of in-game distance units tall the map graphic is. */
-const mapHeight = 8660;
+let mapHeight = 0;
 
 /* The number of in-game distance units the map graphic is offset from the minimum X coordinate. */
-const mapXOffset = 8515;
+let mapXOffset = 0;
 
 /* The number of in-game distance units the map graphic is offset from the minimum Y coordinate. */
-const mapYOffset = 10850;
+let mapYOffset = 0;
 
 /* How often to fetch updates to the map. */
 const updateInterval = 5000;
 
 /* URL to fetch server info from. */
 const updateUrl = "info.json";
+
+/* Whether weathersync info is enabled. */
+let weathersync = false;
 
 /* Icons for each type of weather. */
 const weatherIcons = {
@@ -139,6 +158,8 @@ function addBlip(x, y, z, heading, blipClass, tag) {
 
 function updateMap() {
 	fetch(updateUrl).then(resp => resp.json()).then(info => {
+		document.title = `${info.serverName} Live Map`;
+
 		var serverName = document.getElementById('server-name');
 
 		serverName.innerHTML = info.serverName;
@@ -147,10 +168,12 @@ function updateMap() {
 		var weather = document.getElementById('weather');
 		var wind = document.getElementById("wind");
 
-		time.innerHTML = dayAndTimeToString(info.time);
-		weather.innerHTML = weatherIcons[info.weather];
-		weather.title = info.weather;
-		wind.innerHTML = cardinalDirection(info.wind.direction);
+		if (weathersync) {
+			time.innerHTML = dayAndTimeToString(info.time);
+			weather.innerHTML = weatherIcons[info.weather];
+			weather.title = info.weather;
+			wind.innerHTML = cardinalDirection(info.wind.direction);
+		}
 
 		var playerList = document.getElementById('player-list');
 		var blips = document.getElementById('blips');
@@ -223,38 +246,40 @@ function updateMap() {
 			addBlip(point.x, point.y, point.z, 0, 'blip pin', point.name);
 		});
 
-		var forecastDiv = document.getElementById("forecast");
+		if (weathersync) {
+			var forecastDiv = document.getElementById("forecast");
 
-		forecastDiv.innerHTML = "";
+			forecastDiv.innerHTML = "";
 
-		var prevDay;
+			var prevDay;
 
-		info.forecast.forEach(entry => {
-			var dayDiv = document.createElement("div");
-			dayDiv.className = "forecast-day";
-			if (entry.day != prevDay) {
-				dayDiv.innerHTML = dayOfWeek(entry.day);
-				prevDay = entry.day;
-			}
+			info.forecast.forEach(entry => {
+				var dayDiv = document.createElement("div");
+				dayDiv.className = "forecast-day";
+				if (entry.day != prevDay) {
+					dayDiv.innerHTML = dayOfWeek(entry.day);
+					prevDay = entry.day;
+				}
 
-			var timeDiv = document.createElement("div");
-			timeDiv.className = "forecast-time";
-			timeDiv.innerHTML = timeToString(entry);
+				var timeDiv = document.createElement("div");
+				timeDiv.className = "forecast-time";
+				timeDiv.innerHTML = timeToString(entry);
 
-			var weatherDiv = document.createElement("div");
-			weatherDiv.className = "forecast-weather";
-			weatherDiv.innerHTML = weatherIcons[entry.weather];
-			weatherDiv.title = entry.weather;
+				var weatherDiv = document.createElement("div");
+				weatherDiv.className = "forecast-weather";
+				weatherDiv.innerHTML = weatherIcons[entry.weather];
+				weatherDiv.title = entry.weather;
 
-			var windDiv = document.createElement("div");
-			windDiv.className = "forecast-wind";
-			windDiv.innerHTML = cardinalDirection(entry.wind);
+				var windDiv = document.createElement("div");
+				windDiv.className = "forecast-wind";
+				windDiv.innerHTML = cardinalDirection(entry.wind);
 
-			forecastDiv.appendChild(dayDiv);
-			forecastDiv.appendChild(timeDiv);
-			forecastDiv.appendChild(weatherDiv);
-			forecastDiv.appendChild(windDiv);
-		});
+				forecastDiv.appendChild(dayDiv);
+				forecastDiv.appendChild(timeDiv);
+				forecastDiv.appendChild(weatherDiv);
+				forecastDiv.appendChild(windDiv);
+			});
+		}
 	});
 }
 
@@ -263,7 +288,9 @@ function addCustomPoint(name, x, y, z) {
 }
 
 window.addEventListener("load", event => {
-	document.getElementById("map").addEventListener("mousemove", mapOnMouseMove);
+	let map = document.getElementById('map');
+
+	map.addEventListener("mousemove", mapOnMouseMove);
 
 	document.querySelectorAll("#tab-bar button").forEach(button => button.addEventListener("click", tabButtonOnClick));
 
@@ -276,6 +303,34 @@ window.addEventListener("load", event => {
 		addCustomPoint(`${x}, ${y}, ${z}`, parseFloat(x), parseFloat(y), parseFloat(z));
 	}
 
-	updateMap();
-	setInterval(updateMap, updateInterval);
+	fetch('game').then(resp => resp.json()).then(resp => {
+		if (resp.game == "gta5") {
+			document.querySelectorAll('.tab-button').forEach(e => e.style.fontFamily = "Pricedown");
+			document.body.style.backgroundColor = '#0fa8d2';
+			map.style.backgroundImage = 'url("gta5/map.jpg")';
+
+			document.getElementById('forecast-button').remove();
+
+			mapWidth = gta5Map.width;
+			mapHeight = gta5Map.height;
+			mapXOffset = gta5Map.xOffset;
+			mapYOffset = gta5Map.yOffset;
+
+			weathersync = false;
+		} else {
+			document.querySelectorAll('.tab-button').forEach(e => e.style.fontFamily = "Chinese Rocks");
+			document.body.style.backgroundColor = '#d4b891';
+			map.style.backgroundImage = 'url("rdr3/map.jpg")';
+
+			mapWidth = rdr3Map.width;
+			mapHeight = rdr3Map.height;
+			mapXOffset = rdr3Map.xOffset;
+			mapYOffset = rdr3Map.yOffset;
+
+			weathersync = true;
+		}
+
+		updateMap();
+		setInterval(updateMap, updateInterval);
+	});
 });
