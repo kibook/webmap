@@ -1,4 +1,4 @@
-# RedM Web Map
+# FiveM/RedM Web Map
 
 Live web-based map showing the locations of players and other info about the server.
 
@@ -10,11 +10,11 @@ https://redm.khzae.net/map/
 
 - [httpmanager](https://github.com/kibook/httpmanager)
 
-- [weathersync](https://github.com/kibook/redm-weathersync)
+- [weathersync](https://github.com/kibook/redm-weathersync) (only for RedM)
 
 # Installation
 
-1. Copy to a directory in the `resources` folder of your RedM server.
+1. Copy to a directory in the `resources` folder of your server.
 
    Example: `/var/redm/server-data/resources/[local]/webmap`
 
