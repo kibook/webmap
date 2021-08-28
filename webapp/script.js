@@ -310,6 +310,7 @@ window.addEventListener("load", event => {
 			map.style.backgroundImage = 'url("gta5/map.jpg")';
 
 			document.getElementById('forecast-button').remove();
+			document.getElementById('weather-container').remove();
 
 			mapWidth = gta5Map.width;
 			mapHeight = gta5Map.height;
