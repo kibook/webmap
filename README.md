@@ -2,9 +2,10 @@
 
 Live web-based map showing the locations of players and other info about the server.
 
-# Example
+# Examples
 
-https://redm.khzae.net/map/
+- https://fivem.khzae.net/map/
+- https://redm.khzae.net/map/
 
 # Requirements
 
@@ -16,7 +17,7 @@ https://redm.khzae.net/map/
 
 1. Copy to a directory in the `resources` folder of your server.
 
-   Example: `/var/redm/server-data/resources/[local]/webmap`
+   Example: `resources/[local]/webmap`
 
 2. Add `start webmap` to `server.cfg`.
 
@@ -25,3 +26,5 @@ https://redm.khzae.net/map/
    Examples:
    - http://redm.khzae.net:30120/webmap/
    - https://kibukj-jqv8ok.users.cfx.re/webmap/
+   - http://fivem.khzae.net:30120/webmap/
+   - https://kibukj-8l4kjb.users.cfx.re/webmap/
