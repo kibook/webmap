@@ -10,6 +10,18 @@ local function prunePlayers()
 	end
 end
 
+local function getWebmapUrl()
+	local url = GetConvar("web_baseUrl", "")
+
+	if url == "" then
+		url = "http://[server IP]:[server port]/" .. GetCurrentResourceName() .. "/"
+	else
+		url = "https://" .. url .. "/" .. GetCurrentResourceName() .. "/"
+	end
+
+	return url
+end
+
 AddEventHandler("playerDropped", function(reason)
 	players[source] = nil
 end)
@@ -19,6 +31,8 @@ AddEventHandler("webmap:updateInfo", function(playerInfo)
 end)
 
 Citizen.CreateThread(function()
+	print("Access the live map at: " .. getWebmapUrl())
+
 	while true do
 		prunePlayers()
 		TriggerClientEvent("webmap:updateInfo", -1)
