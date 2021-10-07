@@ -10,8 +10,7 @@ Live web-based map showing the locations of players and other info about the ser
 # Requirements
 
 - [httpmanager](https://github.com/kibook/httpmanager)
-
-- [weathersync](https://github.com/kibook/redm-weathersync) (only for RedM)
+- [weathersync](https://github.com/kibook/redm-weathersync)
 
 # Installation
 

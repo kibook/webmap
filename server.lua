@@ -29,7 +29,6 @@ Citizen.CreateThread(function()
 end)
 
 SetHttpHandler(exports.httpmanager:createHttpHandler {
-	documentRoot = "webapp",
 	routes = {
 		["^/info.json$"] = function(req, res, helpers)
 			local data = {}
@@ -37,7 +36,7 @@ SetHttpHandler(exports.httpmanager:createHttpHandler {
 			data.serverName = GetConvar("sv_projectName", GetConvar("sv_hostname", "Server Name"))
 			data.players = players
 
-			if GetResourceState("weathersync") == "started" then
+			if Config.displayWeather then
 				data.time = exports.weathersync:getTime()
 				data.weather = exports.weathersync:getWeather()
 				data.wind = exports.weathersync:getWind()
@@ -46,8 +45,11 @@ SetHttpHandler(exports.httpmanager:createHttpHandler {
 
 			res.sendJson(data)
 		end,
-		["^/game$"] = function(req, res, helpers)
-			res.sendJson{game = GetConvar("gamename", "gta5")}
+		["^/config.json$"] = function(req, res, helpers)
+			res.sendJson {
+				gameName = GetConvar("gamename", "gta5"),
+				displayWeather = Config.displayWeather
+			}
 		end
 	}
 })

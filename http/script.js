@@ -32,17 +32,38 @@ let mapYOffset = 0;
 /* How often to fetch updates to the map. */
 const updateInterval = 5000;
 
+/* URL to get configuration from. */
+const configUrl = 'config.json';
+
 /* URL to fetch server info from. */
-const updateUrl = "info.json";
+const updateUrl = 'info.json';
 
 /* Whether weathersync info is enabled. */
-let weathersync = false;
+let displayWeather = false;
 
 /* Icons for each type of weather. */
-const weatherIcons = {
+const gta5WeatherIcons = {
+	blizzard:       "❄️",
+	clear:          "☀️",
+	clearing:       "🌦️",
+	clouds:         "⛅",
+	extrasunny:     "☀️",
+	foggy:          "🌫️",
+	halloween:      "🎃",
+	neutral:        "🌧️",
+	overcast:       "☁️",
+	rain:           "🌧️",
+	smog:           "🌫️",
+	snow:           "🌨️",
+	snowlight:      "🌨️",
+	thunder:        "⛈️",
+	xmas:           "🎄"
+};
+
+const rdr3WeatherIcons = {
 	blizzard:       "❄️",
 	clouds:         "⛅",
-	drizzle:        "🌧️",
+	drizzle:        "🌦️",
 	fog:            "🌫️",
 	groundblizzard: "❄️",
 	hail:           "🌨️",
@@ -62,6 +83,8 @@ const weatherIcons = {
 	thunderstorm:   "⛈️",
 	whiteout:       "❄️"
 };
+
+let weatherIcons = {};
 
 let customPoints = [];
 
@@ -168,7 +191,7 @@ function updateMap() {
 		var weather = document.getElementById('weather');
 		var wind = document.getElementById("wind");
 
-		if (weathersync) {
+		if (displayWeather) {
 			time.innerHTML = dayAndTimeToString(info.time);
 			weather.innerHTML = weatherIcons[info.weather];
 			weather.title = info.weather;
@@ -246,7 +269,7 @@ function updateMap() {
 			addBlip(point.x, point.y, point.z, 0, 'blip pin', point.name);
 		});
 
-		if (weathersync) {
+		if (displayWeather) {
 			var forecastDiv = document.getElementById("forecast");
 
 			forecastDiv.innerHTML = "";
@@ -303,21 +326,18 @@ window.addEventListener("load", event => {
 		addCustomPoint(`${x}, ${y}, ${z}`, parseFloat(x), parseFloat(y), parseFloat(z));
 	}
 
-	fetch('game').then(resp => resp.json()).then(resp => {
-		if (resp.game == "gta5") {
+	fetch(configUrl).then(resp => resp.json()).then(resp => {
+		if (resp.gameName == "gta5") {
 			document.querySelectorAll('.tab-button').forEach(e => e.style.fontFamily = "Pricedown");
 			document.body.style.backgroundColor = '#0fa8d2';
 			map.style.backgroundImage = 'url("gta5/map.jpg")';
-
-			document.getElementById('forecast-button').remove();
-			document.getElementById('weather-container').remove();
 
 			mapWidth = gta5Map.width;
 			mapHeight = gta5Map.height;
 			mapXOffset = gta5Map.xOffset;
 			mapYOffset = gta5Map.yOffset;
 
-			weathersync = false;
+			weatherIcons = gta5WeatherIcons;
 		} else {
 			document.querySelectorAll('.tab-button').forEach(e => e.style.fontFamily = "Chinese Rocks");
 			document.body.style.backgroundColor = '#d4b891';
@@ -328,7 +348,14 @@ window.addEventListener("load", event => {
 			mapXOffset = rdr3Map.xOffset;
 			mapYOffset = rdr3Map.yOffset;
 
-			weathersync = true;
+			weatherIcons = rdr3WeatherIcons;
+		}
+
+		displayWeather = resp.displayWeather;
+
+		if (!displayWeather) {
+			document.getElementById('forecast-button').remove();
+			document.getElementById('weather-container').remove();
 		}
 
 		updateMap();
