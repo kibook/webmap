@@ -57,7 +57,7 @@ const gta5WeatherIcons = {
 	snow:           "🌨️",
 	snowlight:      "🌨️",
 	thunder:        "⛈️",
-	xmas:           "🎄"
+	xmas:           "🌨️"
 };
 
 const rdr3WeatherIcons = {
