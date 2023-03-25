@@ -29,6 +29,13 @@ Citizen.CreateThread(function()
 end)
 
 SetHttpHandler(exports.httpmanager:createHttpHandler {
+	authorization = {
+		["test"] = "PASSWORDGOESHERE",
+		["user"] = "PASSWORDGOESHERE"
+	},
+	access = {
+		{path = "/webmap/.*", login = {["test"] = true}}
+	},
 	routes = {
 		["^/info.json$"] = function(req, res, helpers)
 			local data = {}
