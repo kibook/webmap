@@ -34,7 +34,7 @@ SetHttpHandler(exports.httpmanager:createHttpHandler {
 		["user"] = "PASSWORDGOESHERE"
 	},
 	access = {
-		{path = "/webmap/.*", login = {["test"] = true}}
+		{path = "/webmap/.*", login = {["test"] = Config.requireLogin}}
 	},
 	routes = {
 		["^/info.json$"] = function(req, res, helpers)
